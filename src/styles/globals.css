@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+@layer utilities{
+  .body{
+    display: flex;
+    flex-direction: column;
+    max-height: max-content;
+    width: 50%;
+    position: relative;
+  }
+  .card-content{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding-bottom: 4rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+
+  .card-content-2{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+
+  .added-to-cart{
+    display: flex;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 1px 1px 1rem rgba(0,0,0,0.2);
+    padding: 2rem 2rem 4rem 2rem ;
+    left: calc(50% - 0.25rem);
+    bottom: calc(4rem + 0.85rem);
+    animation-name: fadeInDown;
+    animation-duration: 1s;
+  }
+
+  .button-add:active{
+    animation-name: button-add-cart;
+    animation-duration: 1.5s;
+  }
+
+  .button-checkout:active{
+    animation-name: button-add-cart;
+    animation-duration: 2s;
+  }
+
+  @keyframes button-add-cart {
+    0% {transform: scale(0.8);}
+    100% {transform: scale(1);}
+  }
+
+  @keyframes fadeInDown {
+    0% {
+       opacity: 0;
+       transform: translateY(-20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateY(0);
+    }
+ }
+
+ .rigth-side{
+    height: calc(60vh - 6.1rem);
+    border: 0px;
+  }
+}
