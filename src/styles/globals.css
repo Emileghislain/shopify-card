@@ -43,7 +43,7 @@ body {
     display: flex;
     border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 1px 1px 1rem rgba(0,0,0,0.2);
-    padding: 2rem 2rem 4rem 2rem ;
+    padding: 2rem 2rem 5rem 2rem ;
     left: calc(50% - 0.25rem);
     bottom: calc(4rem + 0.85rem);
     animation-name: fadeInDown;
@@ -104,7 +104,7 @@ body {
   .content-checkout-1{
     overflow-y: scroll;
     scrollbar-width: none;
-    height: calc(60vh - 6.1rem);
+    height: calc(80vh - 6.1rem);
   }
 
   @keyframes fadeInUp {
@@ -118,8 +118,19 @@ body {
       }
   }
 
+  @keyframes disappearInUp {
+   0% {
+      opacity: 1;
+      transform: translateY(0);
+   }
+   100% {
+      opacity: 0;
+      transform: translateY(-20px);
+   }
+}
+
  .rigth-side{
-    height: calc(60vh - 6.1rem);
+    height: calc(80vh - 6.1rem);
     border: 0px;
   }
 
@@ -141,4 +152,48 @@ body {
     font-size: 0.55rem;
     margin-bottom: 0.5rem;
   }
+
+  .drawer-anim-appear{
+    display: flex;
+    flex-direction: column;
+    animation-name: fadeInDown;
+    animation-duration: 600ms;
+  }
+
+  .drawer-anim-disappear{
+    animation-name: disappearInUp;
+    animation-duration: 600ms;
+    animation-fill-mode: both;
+    /* display: none; */
+  }
+
+  input[type="radio"]{
+    -webkit-appearance: none;
+    outline: none;
+    margin-top: 0.3rem;
+    border: 2px solid gray;
+    border-radius: 50%;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  input[type="radio"]:checked{
+    border-width: 0.35rem;
+    border-color: #216898;
+  }
+
+  .loader{
+    animation-name: loader;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    border-bottom-color: transparent;
+    box-sizing: border-box;
+  }
+
+  @keyframes loader {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+  }
+
 }
