@@ -7,7 +7,7 @@ export default function Cards() {
   const [checkout, setCheckout] = useState(false);
   const [drawer, setDrawer] = useState({address: false, region: false, state: false});
   const [form, setForm] = useState({contact: "", address: "", region: "", state: "", first: "", last: "", city: "", 
-  zip: "", ship: "free", card: "", expiration: "", code: "", name: "", payment: "card"})
+  zip: "", ship: "free", card: "", expiration: "", code: "", code1: "", name: "", payment: "card"})
 
   const [pay, setPay] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -116,7 +116,7 @@ export default function Cards() {
       </div>
 
       {!loading &&<div className={(checkout ? "card-content-2" : "hidden")+" relative h-[80vh]"}>
-        <div className={(checkout ? "title-checkout" : "hidden")+" justify-between font-sans p-[2rem]"}>
+        <div className={(checkout ? !pay ? "title-checkout" : "flex" : "hidden")+" justify-between font-sans p-[2rem]"}>
           <div>
             <span>Shop</span>
           </div>
@@ -124,30 +124,31 @@ export default function Cards() {
             <span>Cart</span>
           </div>}
         </div>
-        <div className={checkout ? "content-checkout" : "hidden"}>
+        <div className={checkout ? !pay ?"content-checkout" : "flex" : "hidden"}>
             {!pay ? <div className="content-checkout-1 flex flex-col w-[60%] p-[2rem] text-[0.8rem] gap-3 scroll-m-0">
                 <span className="flex self-center text-[#b2b2b2]">Express chackout</span>
                 <div className="flex justify-between w-full gap-2">
-                    <span className="bg-[#4628c2] rounded-sm text-white font-medium w-1/3 text-center flex items-center justify-center">shop 
-                    <span className="bg-white text-[#4628c2] text-[0.5rem] py-[0.02rem] px-[0.1rem] rounded-sm">Pay</span> </span>
-                    <span className="flex w-1/3 h-[2rem] bg-[#f4c557] rounded-sm justify-center">
+                    <span className="bg-[#4628c2] rounded-md text-white text-[0.9rem] font-medium w-1/3 text-center flex items-center justify-center">shop 
+                      <span className="bg-white text-[#4628c2] text-[0.6rem] py-[0.02rem] px-[0.1rem] rounded-sm">Pay</span> 
+                    </span>
+                    <span className="flex w-1/3 h-[2.5rem] bg-[#f4c557] rounded-md justify-center">
                         <Image
                             src={"/images/paypal-svgrepo-com.svg"}
-                            width={10}
+                            width={15}
                             height={20}
                             alt="cancel"
                         />
                         <Image
                             src={"/images/paypal.svg"}
-                            width={40}
+                            width={45}
                             height={50}
                             alt="cancel"
                         />
                     </span>
-                    <span className="bg-black w-1/3 rounded-sm flex justify-center">
+                    <span className="bg-black w-1/3 rounded-md flex justify-center">
                         <Image
                             src={"/images/apple-pay-svgrepo-com.svg"}
-                            width={20}
+                            width={30}
                             height={20}
                             alt="cancel"
                         />
@@ -175,7 +176,7 @@ export default function Cards() {
                     <input type="text" onChange={(e)=>setForm({...form, contact: e.target.value})} name="contact" className="relative border-2 focus:outline-none w-full p-3 pl-2 pt-[0.8rem] rounded"/>
                     <span className={form.contact ? "select-span-hover" : "select-span"} >Email address or phone number</span>
                   </div>
-                  <div className="flex items-center gap-2 font-bold text-[0.7rem]">
+                  <div className="flex items-center gap-2 font-bold text-[0.8rem]">
                     <input type="checkbox" defaultChecked/>
                     <span>Sign me up for news and offers</span>
                   </div>
@@ -295,7 +296,7 @@ export default function Cards() {
                       <input type="radio" name="shipping" value="free" checked={form.ship === "free" ? true : false}/>
                       <div className="flex flex-col">
                         <span className="font-semibold">Standard</span>
-                        <span className="font-light">4 to 5 business days</span>
+                        <span className="font-light text-[0.8rem]">4 to 5 business days</span>
                       </div>
                     </div>
                     <span className="font-semibold">Free</span>
@@ -305,7 +306,7 @@ export default function Cards() {
                       <input type="radio" name="shipping" value="expeded" checked={form.ship === "expeded" ? true : false}/>
                       <div className="flex flex-col">
                         <span className="font-semibold">Expeded</span>
-                        <span className="font-light">2 to 3 business days</span>
+                        <span className="font-light text-[0.8rem]">2 to 3 business days</span>
                       </div>
                     </div>
                     <span className="font-semibold">$10.00</span>
@@ -315,13 +316,12 @@ export default function Cards() {
                 <div className="bg-[#f3f4f6] rounded-md border">
                   <div onClick={()=>setForm({...form, payment: "card"})} className={(form.payment === "card" ? "border-[#216898] bg-[#c9e3f7]" : "")+" flex p-3 border-2 rounded justify-between items-center cursor-pointer"}>
                       <div className="flex gap-2 text-[1rem]">
-                        <input name="credit-radio" type="radio" value={"card"} checked={form.payment === "card" ? true : false}/>
+                        <input name="credit-radio" className="cursor-pointer" type="radio" value={"card"} checked={form.payment === "card" ? true : false}/>
                         <span className="font-semibold">Credit or debit card</span>
                       </div>
                       <div className="flex gap-4">
                         <span className="flex px-1 py-[0.06rem] rounded bg-white">
                           <Image
-                              onClick={() => setDrawer({...drawer, state: false})}
                               className="cursor-pointer"
                               src={"/images/visa-svgrepo-com.svg"}
                               width={30}
@@ -331,7 +331,6 @@ export default function Cards() {
                         </span>
                         <span className="flex px-[0.3rem] py-[0.06rem] rounded bg-white">
                           <Image
-                              onClick={() => setDrawer({...drawer, state: false})}
                               className="cursor-pointer"
                               src={"/images/mastercard-svgrepo-com.svg"}
                               width={30}
@@ -342,7 +341,7 @@ export default function Cards() {
                       </div>
                       
                   </div>
-                  <div className="flex flex-col p-3 gap-2">
+                  <div className={(form.payment === "card" ? "drawer-anim-appear p-3 gap-2" : "hidden")}>
                     <div className="flex flex-col relative">
                       <input type="tel" inputMode="numeric" pattern="[0-9\s]{13,19}" autoComplete="cc-number" onChange={(e)=>setForm({...form, card: e.target.value})} className="relative bg-white focus:outline-none w-full border-2 p-3 pl-2 pt-[0.8rem] rounded"/>
                       <span className={form.card ? "select-span-hover" : "select-span"}>Card number</span>
@@ -361,7 +360,7 @@ export default function Cards() {
                       <input type="text" onChange={(e)=>setForm({...form, name: e.target.value})} className="relative bg-white focus:outline-none w-full border-2 p-3 pl-2 pt-[0.8rem] rounded"/>
                       <span className={form.name ? "select-span-hover" : "select-span"}>Name on card</span>
                     </div>
-                    <div className="flex items-center gap-2 font-bold text-[0.7rem]">
+                    <div className="flex items-center gap-2 font-bold text-[0.8rem]">
                       <input type="checkbox" defaultChecked/>
                       <span>Use shipping address as billing address</span>
                     </div>
@@ -370,7 +369,7 @@ export default function Cards() {
                 <div className="bg-[#f3f4f6] rounded-md border -mt-3">
                   <div onClick={()=>setForm({...form, payment: "paypal"})} className={(form.payment === "paypal" ? "border-[#216898] bg-[#c9e3f7]" : "")+" flex px-3 border rounded justify-between items-center cursor-pointer"}>
                       <div className="flex gap-2 text-[1rem]">
-                        <input name="credit-radio" type="radio" checked={form.payment === "paypal" ? true : false}/>
+                        <input name="credit-radio" type="radio" className="cursor-pointer" checked={form.payment === "paypal" ? true : false}/>
                         <span className="font-semibold">Paypal</span>
                       </div>
                       <div className="flex gap-1 items-center">
@@ -398,7 +397,15 @@ export default function Cards() {
                 text-white text-lg rounded p-2 border-2 border-[#062b44] font-sans">Pay now</button>
             </div> :
             <div className="content-checkout-1 flex flex-col w-[60%] p-[2rem] gap-3 scroll-m-0">
-              <div>
+              <div className="flex gap-2">
+                <span className="flex p-4 border-2 rounded-full">
+                  <Image
+                    src={"/images/check.svg"}
+                    width={20}
+                    height={20}
+                    alt="check"
+                  />
+                </span>
                 <div className="flex flex-col">
                   <span className="text-[0.9rem]">Confirmation #DOF02565GER</span>
                   <span className="font-bold text-[1.2rem]">Thank you, Helen!</span>
@@ -412,7 +419,7 @@ export default function Cards() {
                 <span className="font-bold text-[1.2rem]">Your order is confirmed</span>
                 <span className="text-[0.9rem]">You'll get a confirmation email with your order number soon. <br /> Track your order using the shop app. </span>
               </div>
-              <button className="mt-2 w-1/2 border-2 p-2 font-bold text-[0.9rem] rounded-md">Download Shop to track package</button>
+              <button className="mt-2 w-1/2 border-2 p-2 font-bold text-[0.9rem] rounded-md text-[#115a89]">Download Shop to track package</button>
             </div>
             }
             <div className="rigth-side flex flex-col gap-5 w-[40%] bg-gray-100 p-[2rem] rounded-br-[1rem]">

@@ -18,15 +18,19 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  /* background-color: #509493; */
 }
 
 @layer utilities{
   .body{
+    background-color: white;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     max-height: max-content;
     width: 75%;
     position: relative;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   }
   .card-content{
     padding: 2rem;
@@ -45,7 +49,7 @@ body {
     box-shadow: 1px 1px 1rem rgba(0,0,0,0.2);
     padding: 2rem 2rem 5rem 2rem ;
     left: calc(50% - 0.25rem);
-    bottom: calc(4rem + 0.85rem);
+    bottom: calc(4rem - 0.35rem);
     animation-name: fadeInDown;
     animation-duration: 1s;
   }
@@ -125,7 +129,7 @@ body {
    }
    100% {
       opacity: 0;
-      transform: translateY(-20px);
+      transform: translateY(-10px);
    }
 }
 
@@ -162,8 +166,14 @@ body {
 
   .drawer-anim-disappear{
     animation-name: disappearInUp;
-    animation-duration: 600ms;
+    z-index: 10;
+    animation-duration: 300ms;
     animation-fill-mode: both;
+    /* display: none; */
+  }
+
+  .drawer-anim-disappear::after{
+    z-index: 0;
     /* display: none; */
   }
 
